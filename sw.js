@@ -1,9 +1,9 @@
 const CACHE_NAME = 'yolo-resto-v1';
 const urlsToCache = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icon-192.png",
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/icon-192.png",
   'https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@600;700;800;900&display=swap',
   'https://cdn.jsdelivr.net/npm/opening_hours@3.10.0/opening_hours.min.js'
 ];
