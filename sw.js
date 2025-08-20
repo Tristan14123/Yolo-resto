@@ -1,32 +1,32 @@
-const CACHE_NAME = 'yolo-resto-v1';
+const CACHE_NAME = "yolo-resto-v1";
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png",
-  'https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@600;700;800;900&display=swap',
-  'https://cdn.jsdelivr.net/npm/opening_hours@3.10.0/opening_hours.min.js'
+  "/",
+  "/index.html",
+  "/manifest.json",
+  "/icon-192.png",
+  "https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@600;700;800;900&display=swap",
+  "https://cdn.jsdelivr.net/npm/opening_hours@3.10.0/opening_hours.min.js"
 ];
 
 // Installation du service worker
-self.addEventListener('install', event => {
+self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Cache ouvert');
+        console.log("Cache ouvert");
         return cache.addAll(urlsToCache);
       })
   );
 });
 
 // Activation du service worker
-self.addEventListener('activate', event => {
+self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
-            console.log('Suppression ancien cache:', cacheName);
+            console.log("Suppression ancien cache:", cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -36,7 +36,7 @@ self.addEventListener('activate', event => {
 });
 
 // Interception des requêtes réseau
-self.addEventListener('fetch', event => {
+self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => {
@@ -48,7 +48,7 @@ self.addEventListener('fetch', event => {
         // Sinon, récupère depuis le réseau
         return fetch(event.request).then(response => {
           // Vérifie si la réponse est valide
-          if (!response || response.status !== 200 || response.type !== 'basic') {
+          if (!response || response.status !== 200 || response.type !== "basic") {
             return response;
           }
 
